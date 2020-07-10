@@ -1,12 +1,30 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using ContactManager.Data;
+using ContactManager.Services;
 
 namespace ContactManager.ConsoleApplication
 {
     class Program
-    {
-        static void Main(string[] args)
+    { 
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var services = ConfigureServices();
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            serviceProvider.GetService<ContactsManager>().Run();
+        }
+
+        private static IServiceCollection ConfigureServices()
+        {
+            IServiceCollection services = new ServiceCollection();
+
+            services.AddScoped<IContactCrud, ContactCrud>();
+
+            services.AddTransient<ContactsManager>();
+
+            return services;
         }
     }
 }
