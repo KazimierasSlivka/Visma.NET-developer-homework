@@ -76,17 +76,21 @@ namespace ContactManager.ConsoleApplication
             Console.WriteLine();
             Console.WriteLine("Wait...");
             Console.WriteLine();
-
-            if (_contactCrud.CreateNewContact(contact) == true)
+            if(CheckRequiredFields(contact))
             {
-                Console.WriteLine("Contact is created");
-                Console.WriteLine();
-            }                
-            else
-            {
-                Console.WriteLine("Contact is not created. Make sure that phone number is unique in database or other errors cause problem");
-                Console.WriteLine();
-            }                
+                if (_contactCrud.CreateNewContact(contact) == true)
+                {
+                    Console.WriteLine("Contact is created");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("Contact is not created. Make sure that phone number is unique in database or other errors cause problem");
+                    Console.WriteLine();
+                }
+            }
+            Console.WriteLine("Required fields (Name, Last Name) are empty");
+            Console.WriteLine();
         }
 
         void GetAllContacts()
@@ -132,16 +136,21 @@ namespace ContactManager.ConsoleApplication
             Console.WriteLine("Wait...");
             Console.WriteLine();
 
-            if (_contactCrud.UpdateContactByPhoneNumber(contact, phoneNumber) == true)
+            if(CheckRequiredFields(contact))
             {
-                Console.WriteLine("Contact is updated");
-                Console.WriteLine();
+                if (_contactCrud.UpdateContactByPhoneNumber(contact, phoneNumber) == true)
+                {
+                    Console.WriteLine("Contact is updated");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("Contact is not updated. Make sure that phone number is unique in database or other errors cause problem");
+                    Console.WriteLine();
+                }
             }
-            else
-            {
-                Console.WriteLine("Contact is not updated. Make sure that phone number is unique in database or other errors cause problem");
-                Console.WriteLine();
-            }
+            Console.WriteLine("Required fields (Name, Last Name) are empty");
+            Console.WriteLine();
         }
 
         void GetContactByPhoneNumber(int phoneNumber)
@@ -183,6 +192,13 @@ namespace ContactManager.ConsoleApplication
                 Console.WriteLine("Contact deleted");
             else
                 Console.WriteLine("No contact or database error");
+        }
+
+        bool CheckRequiredFields(ContactModel contact)
+        {
+            if (!string.IsNullOrEmpty(contact.Name) && !string.IsNullOrEmpty(contact.LastName))
+                return true;
+            return false;
         }
     }
 }
