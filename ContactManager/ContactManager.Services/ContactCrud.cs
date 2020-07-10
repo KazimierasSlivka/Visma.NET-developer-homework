@@ -47,11 +47,16 @@ namespace ContactManager.Services
             {
                 try
                 {
-                    var contactFromDb = GetContactByPhoneNumber(contact.PhoneNumber);
+                    var contactFromDb = GetContactByPhoneNumber(phoneNumber);
                     if(contactFromDb != null)
                     {
-                        dbContext.Entry(contact).State = EntityState.Modified;
-                        dbContext.SaveChangesAsync();
+                        contactFromDb.Name = newContact.Name;
+                        contactFromDb.LastName = newContact.LastName;
+                        contactFromDb.PhoneNumber = newContact.PhoneNumber;
+                        contactFromDb.Address = newContact.Address;
+
+                        dbContext.Entry(contactFromDb).State = EntityState.Modified;
+                        dbContext.SaveChanges();
                     }
                     return true;
                 }
