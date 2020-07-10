@@ -79,12 +79,12 @@ namespace ContactManager.ConsoleApplication
 
             if (_contactCrud.CreateNewContact(contact) == true)
             {
-                Console.WriteLine("Contact created");
+                Console.WriteLine("Contact is created");
                 Console.WriteLine();
             }                
             else
             {
-                Console.WriteLine("Contact is not created. ERROR");
+                Console.WriteLine("Contact is not created. Make sure that phone number is unique in database or other errors cause problem");
                 Console.WriteLine();
             }                
         }
@@ -134,12 +134,12 @@ namespace ContactManager.ConsoleApplication
 
             if (_contactCrud.UpdateContactByPhoneNumber(contact, phoneNumber) == true)
             {
-                Console.WriteLine("Contact updated");
+                Console.WriteLine("Contact is updated");
                 Console.WriteLine();
             }
             else
             {
-                Console.WriteLine("Contact is not created. ERROR");
+                Console.WriteLine("Contact is not updated. Make sure that phone number is unique in database or other errors cause problem");
                 Console.WriteLine();
             }
         }

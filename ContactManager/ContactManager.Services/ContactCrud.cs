@@ -15,9 +15,18 @@ namespace ContactManager.Services
             {
                 try
                 {
-                    dbContext.Contacts.Add(contact);
-                    dbContext.SaveChanges();
-                    return true;
+                    var contacts = dbContext.Contacts
+                        .Where(p => p.PhoneNumber == contact.PhoneNumber)
+                        .Select(p => p);
+
+                    if (contacts.Count() == 0)
+                    {
+                        dbContext.Contacts.Add(contact);
+                        dbContext.SaveChanges();
+                        return true;
+                    }
+                    return false;
+
                 }
                 catch
                 {
@@ -50,15 +59,25 @@ namespace ContactManager.Services
                     var contactFromDb = GetContactByPhoneNumber(phoneNumber);
                     if(contactFromDb != null)
                     {
-                        contactFromDb.Name = newContact.Name;
-                        contactFromDb.LastName = newContact.LastName;
-                        contactFromDb.PhoneNumber = newContact.PhoneNumber;
-                        contactFromDb.Address = newContact.Address;
+                        var contacts = dbContext.Contacts
+                            .Where(p => p.PhoneNumber == newContact.PhoneNumber)
+                            .Select(p => p);
 
-                        dbContext.Entry(contactFromDb).State = EntityState.Modified;
-                        dbContext.SaveChanges();
+                        if (contacts.Count() == 0)
+                        {
+                            contactFromDb.Name = newContact.Name;
+                            contactFromDb.LastName = newContact.LastName;
+                            contactFromDb.PhoneNumber = newContact.PhoneNumber;
+                            contactFromDb.Address = newContact.Address;
+
+                            dbContext.Entry(contactFromDb).State = EntityState.Modified;
+                            dbContext.SaveChanges();
+
+                            return true;
+                        }
+                        return false;
                     }
-                    return true;
+                    return false;                    
                 }
                 catch
                 {
