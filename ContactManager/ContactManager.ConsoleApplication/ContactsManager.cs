@@ -76,19 +76,16 @@ namespace ContactManager.ConsoleApplication
             Console.WriteLine();
             Console.WriteLine("Wait...");
             Console.WriteLine();
+
             if(CheckRequiredFields(contact))
             {
                 if (_contactCrud.CreateNewContact(contact) == true)
-                {
                     Console.WriteLine("Contact is created");
-                    Console.WriteLine();
-                }
                 else
-                {
-                    Console.WriteLine("Contact is not created. Make sure that phone number is unique in database or other errors cause problem");
-                    Console.WriteLine();
-                }
+                    Console.WriteLine("Contact is not created. Make sure that phone number is unique in database or other errors cause problem"); 
+                Console.WriteLine();
             }
+
             Console.WriteLine("Required fields (Name, Last Name) are empty");
             Console.WriteLine();
         }
@@ -106,11 +103,11 @@ namespace ContactManager.ConsoleApplication
                     Console.WriteLine("Last Name: {0}", contact.LastName);
                     Console.WriteLine("Phone number: {0}", contact.PhoneNumber);
                     Console.WriteLine("Address: {0}", contact.Address);
-                    Console.WriteLine("--------------------------------------------");
-                    Console.WriteLine();
+                    Console.WriteLine("--------------------------------------------");                    
                 }
             else
                 Console.WriteLine("List is empty or database error");
+            Console.WriteLine();
         }
 
         void UpdateContactByPhoneNumber()
@@ -139,15 +136,10 @@ namespace ContactManager.ConsoleApplication
             if(CheckRequiredFields(contact))
             {
                 if (_contactCrud.UpdateContactByPhoneNumber(contact, phoneNumber) == true)
-                {
                     Console.WriteLine("Contact is updated");
-                    Console.WriteLine();
-                }
                 else
-                {
                     Console.WriteLine("Contact is not updated. Make sure that phone number is unique in database or other errors cause problem");
-                    Console.WriteLine();
-                }
+                Console.WriteLine();
             }
             Console.WriteLine("Required fields (Name, Last Name) are empty");
             Console.WriteLine();
@@ -166,13 +158,10 @@ namespace ContactManager.ConsoleApplication
                 Console.WriteLine("Phone number: {0}", contact.PhoneNumber);
                 Console.WriteLine("Address: {0}", contact.Address);
                 Console.WriteLine("--------------------------------------------");
-                Console.WriteLine();
             }
             else
-            {
                 Console.WriteLine("No contact or database error");
-                Console.WriteLine();
-            }
+            Console.WriteLine();
         }
 
         void DeleteContactByPhoneNumber()
@@ -192,6 +181,7 @@ namespace ContactManager.ConsoleApplication
                 Console.WriteLine("Contact deleted");
             else
                 Console.WriteLine("No contact or database error");
+            Console.WriteLine();
         }
 
         bool CheckRequiredFields(ContactModel contact)
