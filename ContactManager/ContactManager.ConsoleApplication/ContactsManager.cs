@@ -85,8 +85,8 @@ namespace ContactManager.ConsoleApplication
                     Console.WriteLine("Contact is not created. Make sure that phone number is unique in database or other errors cause problem"); 
                 Console.WriteLine();
             }
-
-            Console.WriteLine("Required fields (Name, Last Name) are empty");
+            else
+                Console.WriteLine("Required fields (Name, Last Name) are empty");
             Console.WriteLine();
         }
 
@@ -141,7 +141,8 @@ namespace ContactManager.ConsoleApplication
                     Console.WriteLine("Contact is not updated. Make sure that phone number is unique in database or other errors cause problem");
                 Console.WriteLine();
             }
-            Console.WriteLine("Required fields (Name, Last Name) are empty");
+            else
+                Console.WriteLine("Required fields (Name, Last Name) are empty");
             Console.WriteLine();
         }
 

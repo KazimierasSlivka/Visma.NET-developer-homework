@@ -3,7 +3,6 @@ using System.Linq;
 using ContactManager.Data;
 using ContactManager.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace ContactManager.Services
 {
@@ -26,7 +25,6 @@ namespace ContactManager.Services
                         return true;
                     }
                     return false;
-
                 }
                 catch
                 {
